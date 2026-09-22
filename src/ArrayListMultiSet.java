@@ -12,7 +12,7 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     void add(int item) {
-
+        lst.add(item);
     }
 
     /**
@@ -23,7 +23,7 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     void remove(int item) {
-
+        lst.remove(item);
     }
 
     /**
