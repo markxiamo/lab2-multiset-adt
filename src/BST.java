@@ -49,6 +49,14 @@ public class BST {
     public void insert(int item) {
         if (this.isEmpty()) {
             this.root = item;
+            this.left = null;
+            this.right = null;
+        } else {
+            if (item > this.root) {
+                this.right.insert(item);
+            } else {
+                this.left.insert(item);
+            }
         }
     }
 
@@ -101,15 +109,37 @@ public class BST {
     }
 
     public int height() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            return Math.max(this.left.height(), this.right.height()) + 1;
+        }
     }
 
     public int count(int item) {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else if (this.root > item) {
+            return this.left.count(item);
+        } else if (this.root < item) {
+            return this.right.count(item);
+        } else {
+            return 1 + this.left.count(item) + this.right.count(item);
+        }
     }
 
     public int getSize() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else if (this.left == null && this.right == null) {
+            return 1;
+        } else if (this.left == null) {
+            return 1 + this.right.getSize();
+        } else if (this.right == null) {
+            return 1 + this.left.getSize();
+        } else {
+            return 1 + this.left.getSize() + this.right.getSize();
+        }
     }
 
     public static void main(String[] args) {
