@@ -29,7 +29,7 @@ public class BST {
 
 
     public boolean isEmpty() {
-        return false; // TODO implement me!
+        return this.root == null;
     }
 
     public boolean contains(int item) {
@@ -47,21 +47,57 @@ public class BST {
 
 
     public void insert(int item) {
-
+        if (this.isEmpty()) {
+            this.root = item;
+        }
     }
 
 
     public void delete(int item) {
-
+        if (this.isEmpty()) {
+            return;
+        }
+        if (this.root == item) {
+            this.deleteRoot();
+        } else {
+            if (this.root > item) {
+                this.left.deleteRoot();
+            } else {
+                this.right.deleteRoot();
+            }
+        }
     }
 
     private void deleteRoot() {
-
+        if (this.left == null && this.right == null) {
+            this.root = null;
+        } else if (this.left == null) {
+            BST temp = this.right;
+            this.root = temp.root;
+            this.left = temp.left;
+            this.right = temp.right;
+        } else if (this.right == null) {
+            BST temp = this.left;
+            this.root = temp.root;
+            this.left = temp.left;
+            this.right = temp.right;
+        } else {
+            this.root = this.left.extractMax();
+        }
     }
 
 
     private int extractMax() {
-        return -1;
+        if (this.right == null) {
+            BST temp = this.left;
+            Integer res = this.root;
+            this.root = temp.root;
+            this.left = temp.left;
+            this.right = temp.right;
+            return res;
+        } else {
+            return this.right.extractMax();
+        }
     }
 
     public int height() {
