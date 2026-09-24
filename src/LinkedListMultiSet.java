@@ -25,63 +25,54 @@ public class LinkedListMultiSet extends MultiSet {
     }
 
     public void remove(int item) {
-        if (this.front == null) {
-            return;
-        } else {
-            Node curr = front;
-            Node prev = null;
-            while (curr != null) {
-                if (curr.item == item) {
-                    size -= 1;
-                    if (prev != null) {
-                        prev.next = curr.next;
-                        return;
-                    } else {
-                        this.front = curr.next;
-                        return;
-                    }
+        Node previous = null;
+        Node current = front;
+
+        while (current != null) {
+            if (current.item == item) {
+                if (previous == null) {
+                    front = current.next;
+                } else {
+                    previous.next = current.next;
                 }
-                prev = curr;
-                curr = curr.next;
+                size -= 1;
+                return;
             }
+
+            previous = current;
+            current = current.next;
         }
     }
 
     public boolean contains(int item) {
-        Node curr = front;
-        while (curr != null) {
-            if (curr.item == item) {
+        Node current = front;
+        while (current != null) {
+            if (current.item == item) {
                 return true;
             }
-            curr = curr.next;
+            current = current.next;
         }
         return false;
     }
 
     public boolean isEmpty() {
-        return this.front == null;
+        return front == null;
     }
 
 
     public int count(int item) {
-        int sum = 0;
-        Node curr = front;
-        while (curr != null) {
-            if (curr.item == item) {
-                sum += 1;
+        int occurrences = 0;
+        Node current = front;
+        while (current != null) {
+            if (current.item == item) {
+                occurrences += 1;
             }
-            curr = curr.next;
+            current = current.next;
         }
-        return sum;
+        return occurrences;
     }
 
     public int size() {
-        int size = 0;
-        Node curr = front;
-        while (curr != null) {
-            size += 1;
-            curr = curr.next;
-        }
         return size;
     }
 }

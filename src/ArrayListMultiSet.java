@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ArrayListMultiSet extends MultiSet {
 
@@ -24,7 +23,7 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     void remove(int item) {
-        lst.remove(item);
+        lst.remove(Integer.valueOf(item));
     }
 
     /**
@@ -54,14 +53,13 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     int count(int item) {
-        int count = 0;
-        for (Integer element: lst) {
-            if (element == item) {
-                count += 1;
+        int occurrences = 0;
+        for (int value : lst) {
+            if (value == item) {
+                occurrences += 1;
             }
         }
-        return count;
-        //return Collections.frequency(lst, item);
+        return occurrences;
     }
 
     /**
